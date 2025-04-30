@@ -5,3 +5,4 @@ Neste repositório estão presentes exercícios e desafios realizados durante a 
 
 **Atividades Avaliativas**
 - [Desafio 1](/desafio1/)
+- [Desafio 2](/desafio2/)
