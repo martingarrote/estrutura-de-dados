@@ -14,19 +14,14 @@ Requisicao* cria_requisicao(char *nome, int inscricao, char *procedimento) {
     Requisicao* r = (Requisicao *) malloc(sizeof(Requisicao));
 
     if (r != NULL) {
-        strcpy(r->nome, nome);
+        strncpy(r->nome, nome, TAMANHO_NOME - 1);
+        r->nome[TAMANHO_NOME - 1] = '\0';
 
-        if (strlen(nome) > TAMANHO_NOME) {
-            nome[TAMANHO_NOME - 1] = '\0';
-        }
 
         r->inscricao = inscricao;
 
-        strcpy(r->procedimento, procedimento);
-        
-        if (strlen(procedimento) > TAMANHO_CODIGO_PROCEDIMENTO) {
-            procedimento[TAMANHO_CODIGO_PROCEDIMENTO - 1] = '\0';
-        }
+        strncpy(r->procedimento, procedimento, TAMANHO_CODIGO_PROCEDIMENTO - 1);
+        r->procedimento[TAMANHO_CODIGO_PROCEDIMENTO - 1] = '\0';
     }
     
     return r;
