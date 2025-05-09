@@ -1,37 +1,53 @@
 #include <string.h>
 #include <stdlib.h>
-#include <stdbool.h>
 #include "cliente.h"
 
-#define TAMANHO_NOME 40
-#define TAMANHO_BAIRRO 40
+#define TAMANHO_NOME 41
+#define TAMANHO_BAIRRO 41
 
 struct Cliente_ {
     char nome[TAMANHO_NOME];
     char bairro[TAMANHO_BAIRRO];
     int pessoas;
-    bool criancas;
+    int criancas;
     double renda;
 };
 
-Cliente* cria_cliente(char *nome, char *bairro, int pessoas, bool criancas, double renda) {
+Cliente* cria_cliente(char *nome, char *bairro, int pessoas, int criancas, double renda) {
     Cliente* c = (Cliente *) malloc(sizeof(Cliente));
 
     if (c != NULL) {
-        strncpy(c->nome, nome, TAMANHO_NOME - 1);
-        c->nome[TAMANHO_NOME - 1] = '\0';
+        int tamanho = strlen(nome);
 
-        strncpy(c->bairro, bairro, TAMANHO_BAIRRO - 1);
-        c->bairro[TAMANHO_BAIRRO - 1] = '\0';
+        if (tamanho > TAMANHO_NOME - 1) {
+            tamanho = TAMANHO_NOME - 1;
+        }
+
+        strncpy(c->nome, nome, tamanho);
+        c->nome[TAMANHO_NOME] = '\0';
+
+
+        tamanho = strlen(bairro);
+
+        if (tamanho > TAMANHO_BAIRRO - 1) {
+            tamanho = TAMANHO_BAIRRO - 1;
+        }
+        
+        strncpy(c->bairro, bairro, tamanho);
+        c->bairro[TAMANHO_BAIRRO] = '\0';
 
         c->pessoas = pessoas;
-
         c->criancas = criancas;
-
         c->renda = renda;
     }
 
     return c;
+}
+
+void libera_cliente(Cliente *cliente) {
+    if (cliente != NULL) {
+        free(cliente);
+    }
 }
 
 char* get_nome(Cliente *cliente) {
@@ -46,7 +62,7 @@ int get_pessoas(Cliente *cliente) {
     return cliente->pessoas;
 }
 
-bool get_criancas(Cliente *cliente) {
+int get_criancas(Cliente *cliente) {
     return cliente->criancas;
 }
 
