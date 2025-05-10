@@ -4,6 +4,12 @@
 #include "cliente.h"
 #include "lista.h"
 
+#define CRITERIO_NOME 1
+#define CRITERIO_BAIRRO 2
+#define CRITERIO_PESSOAS 3
+#define CRITERIO_CRIANCAS 4
+#define CRITERIO_RENDA 5
+
 #define TAMANHO_HASH_NOME 100
 #define TAMANHO_HASH_BAIRRO 50
 #define TAMANHO_HASH_PESSOAS 5
@@ -133,27 +139,27 @@ int insere_cliente(Estrutura *estrutura, int criterio, Cliente *cliente) {
     Lista **lista_destino = NULL;
     
     switch (criterio) {
-        case 1:
+        case CRITERIO_NOME:
             indice = hash_string(get_nome(cliente), TAMANHO_HASH_NOME);
             lista_destino = &(estrutura->hash_nome[indice]);
             break;
         
-        case 2:
+        case CRITERIO_BAIRRO:
             indice = hash_string(get_bairro(cliente), TAMANHO_HASH_BAIRRO);
             lista_destino = &(estrutura->hash_bairro[indice]);
             break;
         
-        case 3:
+        case CRITERIO_PESSOAS:
             indice = hash_pessoas(get_pessoas(cliente));
             lista_destino = &(estrutura->hash_pessoas[indice]);
             break;
         
-        case 4:
+        case CRITERIO_CRIANCAS:
             indice = hash_criancas(get_criancas(cliente));
             lista_destino = &(estrutura->hash_criancas[indice]);
             break;
         
-        case 5:
+        case CRITERIO_RENDA:
             indice = hash_renda(get_renda(cliente));
             lista_destino = &(estrutura->hash_renda[indice]);
             break;
@@ -186,7 +192,7 @@ Lista* recupera_cliente(Estrutura *estrutura, int criterio, int complemento, cha
     Lista *lista_origem = NULL;
     
     switch (criterio) {
-        case 1:
+        case CRITERIO_NOME:
             if (busca == NULL) {
                 return resultado;
             }
@@ -209,7 +215,7 @@ Lista* recupera_cliente(Estrutura *estrutura, int criterio, int complemento, cha
             }
             break;
         
-        case 2:  // Bairro
+        case CRITERIO_BAIRRO:
             if (busca == NULL) {
                 return resultado;
             }
@@ -232,7 +238,7 @@ Lista* recupera_cliente(Estrutura *estrutura, int criterio, int complemento, cha
             }
             break;
         
-        case 3:
+        case CRITERIO_PESSOAS:
             if (complemento < 1 || complemento > 5) {
                 return resultado;
             }
@@ -256,7 +262,7 @@ Lista* recupera_cliente(Estrutura *estrutura, int criterio, int complemento, cha
             }
             break;
         
-        case 4:
+        case CRITERIO_CRIANCAS:
             if (complemento != 0 && complemento != 1) {
                 return resultado;
             }
@@ -275,7 +281,7 @@ Lista* recupera_cliente(Estrutura *estrutura, int criterio, int complemento, cha
             }
             break;
         
-        case 5:
+        case CRITERIO_RENDA:
             if (complemento < 1 || complemento > 4) {
                 return resultado;
             }
