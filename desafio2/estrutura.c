@@ -50,7 +50,7 @@ int hash_criancas(int criancas) {
 }
 
 int hash_renda(double renda) {
-    if (renda <= 2000.0) {
+    if (renda < 2000.0) {
         return 0;
     } else if (renda <= 3000.0) {
         return 1;
