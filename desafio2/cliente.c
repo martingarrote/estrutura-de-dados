@@ -24,7 +24,7 @@ Cliente* cria_cliente(char *nome, char *bairro, int pessoas, int criancas, doubl
         }
 
         strncpy(c->nome, nome, tamanho);
-        c->nome[TAMANHO_NOME] = '\0';
+        c->nome[TAMANHO_NOME - 1] = '\0';
 
 
         tamanho = strlen(bairro);
@@ -34,7 +34,7 @@ Cliente* cria_cliente(char *nome, char *bairro, int pessoas, int criancas, doubl
         }
         
         strncpy(c->bairro, bairro, tamanho);
-        c->bairro[TAMANHO_BAIRRO] = '\0';
+        c->bairro[TAMANHO_BAIRRO - 1] = '\0';
 
         c->pessoas = pessoas;
         c->criancas = criancas;
